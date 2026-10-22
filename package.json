@@ -1,0 +1,29 @@
+{
+  "name": "@fiex/ui-sdk",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Browser-side SDK for sandboxed Fiex plugin panels",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinhuang001/flex-sdk.git"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3"
+  }
+}

@@ -1,0 +1,29 @@
+name: SDK contract and builds
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust -> target
+      - run: cargo fmt --check --manifest-path rust/Cargo.toml
+      - run: cargo test --manifest-path rust/Cargo.toml
+      - run: cargo clippy --manifest-path rust/Cargo.toml -- -D warnings
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install
+      - run: npm test
