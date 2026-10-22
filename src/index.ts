@@ -254,3 +254,7 @@ export class FiexUiClient {
   }
 }
 export const fiex = new FiexUiClient()
+
+// Expose host-side MessageChannel integration through the same SDK package.
+export { attachFiexPanel } from './host.js'
+export type { HostSession } from './host.js'
